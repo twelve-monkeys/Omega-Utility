@@ -6,11 +6,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 
-@Mod(useMetadata = true, modid = OmegaUtilityInitializer.modid, version = OmegaUtilityInitializer.version)
+@Mod(useMetadata = true, modid = OmegaUtilityInitializer.modid, version = OmegaUtilityInitializer.version,
+        dependencies = "required-after:mcdevlib")
 public class OmegaUtilityInitializer
 {
     public static final String modid = "omega_utility";
-    public static final String version = "0.0.1";
+    public static final String version = "1.0.0";
     
     
     

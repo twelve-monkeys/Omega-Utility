@@ -8,4 +8,6 @@ public class OmegaResourceUtil
     
     public static ResourceLocation retentionIcon = new ResourceLocation("omegaicons", "retentionicon.png");
     
+    public static ResourceLocation optionsIcon = new ResourceLocation("omegaicons", "omegaoptionsicon.png");
+    
 }

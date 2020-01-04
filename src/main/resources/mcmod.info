@@ -1,0 +1,16 @@
+[
+{
+  "modid": "omega_utility",
+  "name": "Omega Utility",
+  "description": "Minecraft client base for different utilities.",
+  "version": "1.0.0",
+  "mcversion": "1.12.2",
+  "url": "https://jumbodinosaurs.com",
+  "updateUrl": "",
+  "authorList": ["Walking_Library"],
+  "credits": "Charlie, Emperor, John, Jumpinqq, KAJ",
+  "logoFile": "/assets/omegaicons/omegaicon.png",
+  "screenshots": [],
+  "dependencies": ["Jums Dev Lib"]
+}
+]
