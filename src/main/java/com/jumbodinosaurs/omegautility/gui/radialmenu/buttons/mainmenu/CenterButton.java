@@ -19,6 +19,6 @@ public class CenterButton extends RadialMainMenuButton
     @Override
     public int getDefaultPriority()
     {
-        return Integer.MAX_VALUE;
+        return Integer.MIN_VALUE + 1;
     }
 }
