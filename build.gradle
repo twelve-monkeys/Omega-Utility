@@ -74,8 +74,8 @@ task moveLibraryModToMods(type: Copy) {
 
 dependencies {
 
-    compile 'com.github.WalkingLibrary:Dev-Lib:1.0.1'
-    compile 'com.github.WalkingLibrary:McDevLib:1.0.0'
+    compile 'com.github.WalkingLibrary:Dev-Lib:1.0.2'
+    compile 'com.github.WalkingLibrary:McDevLib:1.0.1'
     compile 'com.github.classgraph:classgraph:28b32ec'
     compile 'org.spongepowered:spongeapi:8.0.0-SNAPSHOT'
     compile("org.spongepowered:mixin:0.7.11-SNAPSHOT")
@@ -96,8 +96,8 @@ reobf {
 shadowJar {
     dependencies {
         include(dependency('org.spongepowered:mixin'))
-        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.0.1'))
-        include(dependency('com.github.WalkingLibrary:McDevLib:1.0.0'))
+        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.0.2'))
+        include(dependency('com.github.WalkingLibrary:McDevLib:1.0.1'))
         include(dependency('com.github.classgraph:classgraph:28b32ec'))
     }
     exclude 'dummyThing'
