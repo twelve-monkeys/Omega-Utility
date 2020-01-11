@@ -6,11 +6,16 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = 'SpongePowered'
+            url = 'http://repo.spongepowered.org/maven'
+        }
 
     }
 
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
     }
 
@@ -19,19 +24,19 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
-        maven { url 'https://jitpack.io' }
         maven {
             name = 'spongepowered-repo'
             url = 'http://repo.spongepowered.org/maven/'
         }
-
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
+        jcenter()
     }
 }
 
 
-
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -40,19 +45,10 @@ apply plugin: 'maven'
 
 version = "1.0.0"
 group = "java.omegadevs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "omegautility"
+archivesBaseName = "omega_utility"
 
 sourceCompatibility = targetCompatibility = '1.8'
 
-
-repositories {
-    mavenCentral()
-}
-
-
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
 
 minecraft {
     version = "1.12.2-14.23.5.2838"
@@ -60,10 +56,6 @@ minecraft {
     mappings = "snapshot_20171003"
 }
 
-configurations {
-    embed
-    compile.extendsFrom(embed)
-}
 
 task moveLibraryModToMods(type: Copy) {
     dependsOn build
@@ -74,8 +66,8 @@ task moveLibraryModToMods(type: Copy) {
 
 dependencies {
 
-    compile 'com.github.WalkingLibrary:Dev-Lib:1.0.2'
-    compile 'com.github.WalkingLibrary:McDevLib:1.0.1'
+    compile 'com.github.WalkingLibrary:Dev-Lib:1.1.0'
+    compile 'com.github.WalkingLibrary:McDevLib:1.0.2'
     compile 'com.github.classgraph:classgraph:28b32ec'
     compile 'org.spongepowered:spongeapi:8.0.0-SNAPSHOT'
     compile("org.spongepowered:mixin:0.7.11-SNAPSHOT")
@@ -96,8 +88,8 @@ reobf {
 shadowJar {
     dependencies {
         include(dependency('org.spongepowered:mixin'))
-        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.0.2'))
-        include(dependency('com.github.WalkingLibrary:McDevLib:1.0.1'))
+        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.1.0'))
+        include(dependency('com.github.WalkingLibrary:McDevLib:1.0.2'))
         include(dependency('com.github.classgraph:classgraph:28b32ec'))
     }
     exclude 'dummyThing'
@@ -106,6 +98,25 @@ shadowJar {
 }
 
 build.dependsOn(shadowJar)
+
+jar {
+    manifest {
+        attributes(
+                "tweakClass": 'org.spongepowered.asm.launch.MixinTweaker',
+                "TweakOrder": 0,
+                'FMLCorePluginContainsFMLMod': 'true',
+                'FMLCorePlugin': 'com.mixin.Core',
+                'ForceLoadAsMod': 'true',
+                'FMLAT': 'mcdevlib_at.cfg'
+        )
+    }
+}
+
+mixin
+        {
+            defaultObfuscationEnv notch
+            add sourceSets.main, "mixinsDev.json.refmap.json"
+        }
 
 
 processResources {
