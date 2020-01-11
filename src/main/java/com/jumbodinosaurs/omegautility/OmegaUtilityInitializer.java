@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 public class OmegaUtilityInitializer
 {
     public static final String modid = "omega_utility";
-    public static final String version = "1.0.0";
+    public static final String version = "1.0.1";
     
     
     
