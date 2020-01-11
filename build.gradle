@@ -15,7 +15,6 @@ buildscript {
 
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
     }
 
@@ -36,7 +35,6 @@ allprojects {
 
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -69,11 +67,7 @@ dependencies {
     compile 'com.github.WalkingLibrary:Dev-Lib:1.1.0'
     compile 'com.github.WalkingLibrary:McDevLib:1.0.2'
     compile 'com.github.classgraph:classgraph:28b32ec'
-    compile 'org.spongepowered:spongeapi:8.0.0-SNAPSHOT'
-    compile("org.spongepowered:mixin:0.7.11-SNAPSHOT")
-            {
-                exclude module: "launchwrapper"
-            }
+
 }
 
 
@@ -87,7 +81,6 @@ reobf {
 
 shadowJar {
     dependencies {
-        include(dependency('org.spongepowered:mixin'))
         include(dependency('com.github.WalkingLibrary:Dev-Lib:1.1.0'))
         include(dependency('com.github.WalkingLibrary:McDevLib:1.0.2'))
         include(dependency('com.github.classgraph:classgraph:28b32ec'))
@@ -99,24 +92,7 @@ shadowJar {
 
 build.dependsOn(shadowJar)
 
-jar {
-    manifest {
-        attributes(
-                "tweakClass": 'org.spongepowered.asm.launch.MixinTweaker',
-                "TweakOrder": 0,
-                'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'com.mixin.Core',
-                'ForceLoadAsMod': 'true',
-                'FMLAT': 'mcdevlib_at.cfg'
-        )
-    }
-}
 
-mixin
-        {
-            defaultObfuscationEnv notch
-            add sourceSets.main, "mixinsDev.json.refmap.json"
-        }
 
 
 processResources {
