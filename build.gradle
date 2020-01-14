@@ -64,8 +64,8 @@ task moveLibraryModToMods(type: Copy) {
 
 dependencies {
 
-    compile 'com.github.WalkingLibrary:Dev-Lib:1.1.0'
-    compile 'com.github.WalkingLibrary:McDevLib:1.0.2'
+    compile 'com.github.WalkingLibrary:Dev-Lib:1.+'
+    compile 'com.github.WalkingLibrary:McDevLib:1.+'
     compile 'com.github.classgraph:classgraph:28b32ec'
 
 }
@@ -81,8 +81,8 @@ reobf {
 
 shadowJar {
     dependencies {
-        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.1.0'))
-        include(dependency('com.github.WalkingLibrary:McDevLib:1.0.2'))
+        include(dependency('com.github.WalkingLibrary:Dev-Lib:1.+'))
+        include(dependency('com.github.WalkingLibrary:McDevLib:1.+'))
         include(dependency('com.github.classgraph:classgraph:28b32ec'))
     }
     exclude 'dummyThing'
